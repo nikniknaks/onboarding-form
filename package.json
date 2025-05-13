@@ -4,7 +4,7 @@
   "description": "Simple Onboarding Form",
   "main": "index.ts",
   "scripts": {
-    "test": "test"
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/nikniknaks/onboarding-form/issues"
   },
-  "homepage": "https://github.com/nikniknaks/onboarding-form#readme"
+  "homepage": "https://github.com/nikniknaks/onboarding-form#readme",
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "jsdom": "^26.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.3"
+  }
 }
