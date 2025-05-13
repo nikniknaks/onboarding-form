@@ -1,23 +1,19 @@
 import axios from 'axios';
 import { NUMBER_VALIDATION_ENDPOINT } from './constants';
 
-interface ValidResponse {
-  valid: true;
-  corporationNumber: CorporationNumber;
+export interface ValidationResponse {
+  valid: boolean;
+  corporationNumber?: CorporationNumber;
+  message?: string;
 }
 
-interface InvalidResponse {
-  valid: false;
-  message: string;
-}
-
-type ValidationResponse = ValidResponse | InvalidResponse;
-
-type CorporationNumber = `${string & { length: 8 }}`;
+export type CorporationNumber = `${string & { length: 8 }}`;
 
 export async function validateCorporationNumber(corporationNumber: CorporationNumber): Promise<ValidationResponse> {
+  console.log('axios get: ', `${NUMBER_VALIDATION_ENDPOINT}${corporationNumber}`)
   try {
     const response = await axios.get(`${NUMBER_VALIDATION_ENDPOINT}${corporationNumber}`);
+    console.log("response: ", response)
     return {
       corporationNumber: response.data.corporationNumber,
       valid: true
