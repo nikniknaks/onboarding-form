@@ -1,0 +1,19 @@
+{
+  "name": "onboarding-form",
+  "version": "1.0.0",
+  "description": "Simple Onboarding Form",
+  "main": "index.ts",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikniknaks/onboarding-form.git"
+  },
+  "author": "Nick Adams",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikniknaks/onboarding-form/issues"
+  },
+  "homepage": "https://github.com/nikniknaks/onboarding-form#readme"
+}
