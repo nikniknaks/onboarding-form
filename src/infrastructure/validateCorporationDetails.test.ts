@@ -10,9 +10,9 @@ describe('validateCorporationDetails', () => {
     vi.clearAllMocks();
   });
 
-  it('should return isValid true when the API returns a 200 status code', async () => {
+  it('should return valid is true when the API returns a 200 status code', async () => {
     const mockResponse = {
-      status: 200
+      valid: true
     };
     
     vi.mocked(axios.post).mockResolvedValueOnce(mockResponse);
@@ -35,7 +35,7 @@ describe('validateCorporationDetails', () => {
     );
 
     expect(result).toEqual({
-      status: 200
+      valid: true
     });
   });
 
@@ -59,15 +59,17 @@ describe('validateCorporationDetails', () => {
       phone: "+13062776103"
     });
 
-    expect(axios.post).toHaveBeenCalledWith([`${FORM_VALIDATION_ENDPOINT}`, {
-      firstName: "Hello",
-      lastName: "World",
-      corporationNumber: "00000000",
-      phone: "+13062776103"
-    }]);
+    expect(axios.post).toHaveBeenCalledWith(
+      `${FORM_VALIDATION_ENDPOINT}`, {
+        firstName: "Hello",
+        lastName: "World",
+        corporationNumber: "00000000",
+        phone: "+13062776103"
+      }
+    );
 
     expect(result).toEqual({
-      isValid: false,
+      valid: false,
       message: errorMessage
     });
   });
@@ -87,7 +89,8 @@ describe('validateCorporationDetails', () => {
       phone: "+13062776103"
     });
     
-    expect(axios.post).toHaveBeenCalledWith({
+    expect(axios.post).toHaveBeenCalledWith(
+      `${FORM_VALIDATION_ENDPOINT}`, {
       firstName: "Hello",
       lastName: "World",
       corporationNumber: "00000000",

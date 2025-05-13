@@ -18,7 +18,7 @@ export async function validateCorporationDetails(corporationDetails: Corporation
     const response = await axios.post(`${FORM_VALIDATION_ENDPOINT}`, corporationDetails);
     return {
       valid: true
-    };
+    }
 } catch (error) {
     if (error.response && error.response.status === 400) {
         return {
