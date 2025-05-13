@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import '@primer/primitives/dist/css/functional/themes/light.css'
 import {BaseStyles, ThemeProvider} from '@primer/react'
