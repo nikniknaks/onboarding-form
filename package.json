@@ -4,7 +4,8 @@
   "description": "Simple Onboarding Form",
   "main": "index.ts",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "test:integration": "vitest --config vitest.integration.config.ts"
   },
   "repository": {
     "type": "git",
