@@ -33,6 +33,20 @@ function App() {
     });
   }
 
+  const registerFirstName = {...register("firstName", { required: true, maxLength: 50, pattern: /^[A-Za-z]+$/i })}
+  const registerLastName = {...register("lastName", { required: true, maxLength: 50, pattern: /^[A-Za-z]+$/i })}
+  const registerPhone = {...register("phone", { required: true, pattern: /^(\+?1[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/i })}
+  const registerCorporationNumber = {
+    ...register(
+      "corporationNumber",
+      {
+        required: true,
+        validate: { onBlurValidateFormField }
+      }
+    )
+  }
+
+
   return (
     <>
     <div className='subpixel-antialiased justify-center bg-neutral-50 flex h-screen'>
@@ -53,12 +67,7 @@ function App() {
                 label="First Name"  
                 errors={errors}
                 validationMessage={"Invalid first name. Max 50 alphanumeric characters"}
-                register={register}
-                registerOptions={{
-                  required: true,
-                  maxLength: 50,
-                  pattern: /^[A-Za-z]+$/i
-                }}
+                register={registerFirstName}
             />
           </div>
 
@@ -68,12 +77,7 @@ function App() {
               label="Last Name"  
               errors={errors}
               validationMessage={"Invalid last name. Max 50 alphanumeric characters"}
-              register={register}
-              registerOptions={{
-                required: true,
-                maxLength: 50,
-                pattern: /^[A-Za-z]+$/i
-              }}
+              register={registerLastName}
             />
           </div>
         </div>
@@ -83,13 +87,8 @@ function App() {
             name="phone"
             label="Phone Number"  
             errors={errors}
-            validationMessage={"Invalid phone number. Valid Canadian phone number required"}
-            register={register}
-            registerOptions={{
-              required: true,
-              maxLength: 50,
-              pattern: /^(\+?1[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/i
-            }}
+            validationMessage={"Invalid phone number. Valid Canadian phone number required"} 
+            register={registerPhone}
           />
         </div>
         
@@ -99,12 +98,7 @@ function App() {
             label="Corporation Number"
             errors={errors}
             validationMessage={"Invalid corporation number"}
-            register={register}
-            registerOptions={{
-              required: true,
-              maxLength: 9,
-              validate: { onBlurValidateFormField }
-            }}
+            register={registerCorporationNumber}
           />
         </div>
 

@@ -6,17 +6,16 @@ export const FormTextInput = ({
   validationMessage, 
   errors, 
   register,
-  registerOptions
 }) => (
   <>
     <label className="text-xs leading-[2]">{label}</label>
     <input
       className="border-gray-100 border-2  rounded-lg leading-[2]"
       type="text"
-      {...register(name, registerOptions)}
+      {...register}
     />
     { 
-     errors.firstName && 
+     errors[name] && 
       <span className="text-red-500 text-xs pt-2">{validationMessage}</span>
     }
   </>
