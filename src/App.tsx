@@ -47,7 +47,7 @@ function App() {
 
   const registerFirstName = {...register("firstName", { required: true, maxLength: 50, pattern: /^[A-Za-z]+$/i })}
   const registerLastName = {...register("lastName", { required: true, maxLength: 50, pattern: /^[A-Za-z]+$/i })}
-  const registerPhone = {...register("phone", { required: true, pattern: /^(\+?1[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/i })}
+  const registerPhone = {...register("phone", { required: true, pattern: /^\+1[-.\s]?(\(?\d{3}\)?[-.\s]?)\d{3}[-.\s]?\d{4}$/i })}
   const registerCorporationNumber = {
     ...register(
       "corporationNumber",
