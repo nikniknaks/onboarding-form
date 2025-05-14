@@ -1,6 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form"
 import React from 'react'
 import { validateCorporationNumber } from './infrastructure/validateCorporationNumber'
+import { FormTextInput } from "./components/FormInput";
 
 type Inputs = {
   firstName: string;
@@ -34,45 +35,82 @@ function App() {
 
   return (
     <>
-    <div className={'bg-neutral-300'} style={{width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center'}} >
-        <form onSubmit={handleSubmit(onSubmit)} style={
-          { width: '50%', display: 'flex', flexDirection: 'column', 
-            gap: '1rem', backgroundColor: 'white', borderRadius: '8px', borderStyle: 'solid', borderWidth: '2px', borderColor: '#EFEFEF', padding: '2rem',
-            margin: '2rem'}
-        }>
-        <div style={{display:"flex", justifyContent: 'center'}}>
-          <h1 style={{margin: '0px'}}>Onboarding Form</h1>
+    <div className='subpixel-antialiased justify-center bg-neutral-50 flex h-screen'>
+        <form 
+          onSubmit={handleSubmit(onSubmit)}
+          className={'w-lg rounded-xl bg-white border-2 border-gray-100 border-r-8 px-6 flex flex-col h-fit mt-6'}
+        >
+
+        <div>
+          <h1 className="text-center text-2xl my-4">Onboarding Form</h1>
         </div>
-            <label>First Name</label>
-            <input type="text" {...register("firstName", { required: true, maxLength: 50, pattern: /^[A-Za-z]+$/i })} />
-            { errors.firstName && <span>Invalid First Name. Max 50 Alphanumeric Characters</span>}
-         
-            <label>Last Name</label>
-            <input type="text" {...register("lastName", { required: true, maxLength: 50, pattern: /^[A-Za-z]+$/i })}/>
-            { errors.lastName && <span>Invalid Last Name. Max 50 Alphanumeric Characters</span> }
-          
-            <label>Phone Number</label>
-            <input type="text" {...register("phone", { required: true, pattern: /^(\+?1[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/i })}/>
-            { errors.phone && <span>Invalid Phone Number. Valid Canadian Phone Number Required</span> }
-          
-            <label>Corporation Number</label>
-            <input
-              type="text"
-           
-              {
-                ...register(
-                  "corporationNumber",
-                  {
-                    required: true,
-                    validate: { onBlurValidateFormField }
-                  }
-                )
-              }
+
+        <div className="flex justify-between">
+
+          <div className="flex flex-col w-47 mb-4 ">
+            <FormTextInput
+                name="firstName"
+                label="First Name"  
+                errors={errors}
+                validationMessage={"Invalid first name. Max 50 alphanumeric characters"}
+                register={register}
+                registerOptions={{
+                  required: true,
+                  maxLength: 50,
+                  pattern: /^[A-Za-z]+$/i
+                }}
             />
-            { errors.corporationNumber && <span>Invalid Corporation Number. Max 50 Alphanumeric Characters</span> }
-          <button type='submit' style={{backgroundColor: 'black'}}>Submit</button>
-        </form>
+          </div>
+
+          <div className="flex flex-col w-60 mb-4 ">
+            <FormTextInput
+              name="lastName"
+              label="Last Name"  
+              errors={errors}
+              validationMessage={"Invalid last name. Max 50 alphanumeric characters"}
+              register={register}
+              registerOptions={{
+                required: true,
+                maxLength: 50,
+                pattern: /^[A-Za-z]+$/i
+              }}
+            />
+          </div>
         </div>
+
+        <div  className="flex flex-col mb-4">
+          <FormTextInput
+            name="phone"
+            label="Phone Number"  
+            errors={errors}
+            validationMessage={"Invalid phone number. Valid Canadian phone number required"}
+            register={register}
+            registerOptions={{
+              required: true,
+              maxLength: 50,
+              pattern: /^(\+?1[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/i
+            }}
+          />
+        </div>
+        
+        <div className="flex flex-col mb-4">
+          <FormTextInput
+            name="corporationNumber"
+            label="Corporation Number"
+            errors={errors}
+            validationMessage={"Invalid corporation number"}
+            register={register}
+            registerOptions={{
+              required: true,
+              maxLength: 9,
+              validate: { onBlurValidateFormField }
+            }}
+          />
+        </div>
+
+        <button className="bg-black rounded-lg text-gray-100 text-sm leading-[3] mt-2 mb-6"  type='submit'>Submit {'\u27A2'}</button>
+      </form>
+    </div>
     </>
   )
 }
