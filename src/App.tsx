@@ -1,8 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form"
-import React from 'react'
 import { validateCorporationNumber } from './infrastructure/validateCorporationNumber'
 import { FormTextInput } from "./components/FormInput";
 import { validateCorporationDetails } from "./infrastructure/validateCorporationDetails";
+import { useState } from "react";
 
 type Inputs = {
   firstName: string;
@@ -12,6 +12,7 @@ type Inputs = {
 }
 
 function App() {
+  const [errorMessage, setErrorMessage] = useState<string | null | undefined>(null);
   const {
     register,
     handleSubmit,
@@ -23,21 +24,19 @@ function App() {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     validateCorporationDetails(data).then((response) => {
       if (response.valid) {
-        console.log("Form submitted successfully", data);
+        setErrorMessage(null);
       } else {
-        console.error("Validation failed", response.message);
+        setErrorMessage(response.message);
       }
     }).catch((error) => {
       console.error("Error during validation", error);
     });
-    console.log(data)
   }
 
   const onBlurValidateFormField = (value) => {
     if (!value) {
       return false;
     }
-
     return validateCorporationNumber(value).then((response) => {
       return response.valid;
     }).catch(() => {
@@ -113,7 +112,8 @@ function App() {
           />
         </div>
 
-        <button className="bg-black rounded-lg text-gray-100 text-sm leading-[3] mt-2 mb-6" type='submit'>Submit {'\u27A2'}</button>
+        <button className="bg-black rounded-lg text-gray-100 text-sm leading-[3] mt-2 mb-2" type='submit'>Submit {'\u27A2'}</button>
+        <span className="text-red-500 text-xs pt-2 mb-4">{errorMessage}</span>
       </form>
     </div>
     </>
